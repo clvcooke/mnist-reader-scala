@@ -17,14 +17,12 @@ object MnistLoader {
     *
     * @param baseDirectory the directory for the standard mnist images, file names are assumed
     */
-  def getMnistImageData(baseDirectory: String) = {
-    val startTime = System.currentTimeMillis()
+ def getMnistImageData(baseDirectory: String): (IndexedSeq[Int], IndexedSeq[Int], IndexedSeq[INDArray], IndexedSeq[INDArray]) = {
     val testLabels = readLabels(s"$baseDirectory/t10k-labels-idx1-ubyte.gz")
     val trainingLabels = readLabels(s"$baseDirectory/train-labels-idx1-ubyte.gz")
     val testImages = readImages(s"$baseDirectory/t10k-images-idx3-ubyte.gz")
     val trainingImages = readImages(s"$baseDirectory/train-images-idx3-ubyte.gz")
-    val endTime = System.currentTimeMillis()
-    println("Process took: " + (endTime - startTime))
+    (testLabels, trainingLabels, testImages, trainingImages)
   }
 
   /**
